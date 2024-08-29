@@ -45,7 +45,7 @@ func (s ParcelStore) Get(number int) (Parcel, error) {
 		created_at string
 	)
 
-	err := res.Scan(num, client, status, address, created_at)
+	err := res.Scan(&num, &client, &status, &address, &created_at)
 	if err != nil {
 		return Parcel{}, err
 	}

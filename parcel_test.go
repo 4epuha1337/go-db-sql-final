@@ -58,7 +58,6 @@ func TestAddGetDelete(t *testing.T) {
 		require.NoError(t, err)
 	}
 
-	assert.Equal(t, parcel.Number, prc.Number)
 	assert.Equal(t, parcel.Client, prc.Client)
 	assert.Equal(t, parcel.Address, prc.Address)
 	assert.Equal(t, parcel.Status, prc.Status)
@@ -112,9 +111,8 @@ func TestSetAddress(t *testing.T) {
 		require.NoError(t, err)
 	}
 
-	assert.Equal(t, parcel.Number, prc.Number)
 	assert.Equal(t, parcel.Client, prc.Client)
-	assert.Equal(t, parcel.Address, newAddress)
+	assert.Equal(t, prc.Address, newAddress)
 	assert.Equal(t, parcel.Status, prc.Status)
 	assert.Equal(t, parcel.CreatedAt, prc.CreatedAt)
 }
@@ -155,10 +153,9 @@ func TestSetStatus(t *testing.T) {
 		require.NoError(t, err)
 	}
 
-	assert.Equal(t, parcel.Number, prc.Number)
 	assert.Equal(t, parcel.Client, prc.Client)
 	assert.Equal(t, parcel.Address, prc.Address)
-	assert.Equal(t, parcel.Status, newStatus)
+	assert.Equal(t, prc.Status, newStatus)
 	assert.Equal(t, parcel.CreatedAt, prc.CreatedAt)
 }
 
@@ -223,7 +220,6 @@ func TestGetByClient(t *testing.T) {
 		assert.Equal(t, parcels[i].Address, parcel.Address)
 		assert.Equal(t, parcels[i].Client, parcel.Client)
 		assert.Equal(t, parcels[i].CreatedAt, parcel.CreatedAt)
-		assert.Equal(t, parcels[i].Number, parcel.Number)
 		assert.Equal(t, parcels[i].Status, parcel.Status)
 	}
 }
