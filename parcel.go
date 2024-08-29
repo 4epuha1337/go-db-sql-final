@@ -37,21 +37,14 @@ func (s ParcelStore) Get(number int) (Parcel, error) {
 	res := s.db.QueryRow("SELECT * FROM parcel WHERE number = :number",
     sql.Named("number", number))
 
-	var (
-		num int
-		client int
-		status string
-		address string
-		created_at string
-	)
+	p := Parcel{}
 
-	err := res.Scan(&num, &client, &status, &address, &created_at)
+	err := res.Scan(&p.Number, &p.Client, &p.Status, &p.Address, &p.CreatedAt)
 	if err != nil {
 		return Parcel{}, err
 	}
 
 	// заполните объект Parcel данными из таблицы
-	p := Parcel{num, client, status, address, created_at}
 
 	return p, nil
 }
@@ -78,6 +71,10 @@ func (s ParcelStore) GetByClient(client int) ([]Parcel, error) {
 		}
 
         res = append(res, temp)
+	}
+
+	if err = rows.Err(); err != nil {
+		return nil, err
 	}
 
 	return res, nil
